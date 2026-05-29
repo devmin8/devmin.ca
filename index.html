@@ -169,7 +169,7 @@
   </head>
 
   <body class="grid-bg bg-bg font-sans text-ink selection:text-ink">
-    <header class="site-header sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
+    <header class="grid-pattern sticky top-0 z-50 border-b border-line bg-bg/85 backdrop-blur-md">
       <div class="page-shell flex h-[54px] items-center justify-between">
         <a href="/" class="group flex items-center gap-2.5" aria-label="devmin.ca home">
           <svg
@@ -198,10 +198,10 @@
 
         <div class="flex items-center gap-5">
           <nav class="hidden items-center gap-6 font-mono text-[12px] tracking-tight sm:flex">
-            <a href="#about" class="nav-link">about</a>
-            <a href="#building" class="nav-link">building</a>
-            <a href="#experience" class="nav-link">experience</a>
-            <a href="#contact" class="nav-link">contact</a>
+            <a href="#about" class="text-muted transition-colors hover:text-ink">about</a>
+            <a href="#building" class="text-muted transition-colors hover:text-ink">building</a>
+            <a href="#experience" class="text-muted transition-colors hover:text-ink">experience</a>
+            <a href="#contact" class="text-muted transition-colors hover:text-ink">contact</a>
           </nav>
           <button
             id="theme-toggle"
@@ -350,7 +350,7 @@
                 >getrivet.app<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg
               ></a>
               <span class="status-label">
-                <span class="status-dot status-dot-live relative"></span>
+                <span class="status-dot status-dot-live"></span>
                 Live
               </span>
             </div>
@@ -521,8 +521,8 @@
       <section id="contact" class="section-block">
         <div class="section-kicker" data-reveal><span>05</span> Contact</div>
         <div data-reveal>
-          <p class="availability-line">
-            <span class="status-dot status-dot-live relative"></span>
+          <p class="mb-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted">
+            <span class="status-dot status-dot-live"></span>
             Open to senior frontend engineer roles
           </p>
           <h2

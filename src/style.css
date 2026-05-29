@@ -54,6 +54,12 @@
   --status-dev: #9a6a00;
   --grid: rgba(24, 24, 18, 0.026);
   --grid-major: rgba(24, 24, 18, 0.04);
+  --grid-pattern:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid-major) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+  --grid-pattern-size: 32px 32px, 32px 32px, 160px 160px, 160px 160px;
   --sel: #c9eadc;
 }
 
@@ -80,14 +86,11 @@
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
-    background: var(--bg);
-    color: var(--ink);
+    @apply bg-bg text-ink;
   }
 
   body {
-    min-width: 320px;
-    background: var(--bg);
-    color: var(--ink);
+    @apply min-w-80 bg-bg text-ink;
   }
 
   ::selection {
@@ -95,7 +98,7 @@
   }
 
   [id] {
-    scroll-margin-top: 5rem;
+    @apply scroll-mt-20;
   }
 }
 
@@ -104,32 +107,17 @@
     @apply relative z-10 mx-auto max-w-[760px] px-5 sm:px-6;
   }
 
+  .grid-pattern {
+    background-image: var(--grid-pattern);
+    background-size: var(--grid-pattern-size);
+  }
+
   .grid-bg::before {
     content: '';
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-      linear-gradient(var(--grid-major) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
-    background-size: 32px 32px, 32px 32px, 160px 160px, 160px 160px;
+    @apply fixed inset-0 z-0 pointer-events-none;
+    background-image: var(--grid-pattern);
+    background-size: var(--grid-pattern-size);
     mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 100%);
-  }
-
-  .site-header {
-    background-image:
-      linear-gradient(var(--grid) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
-      linear-gradient(var(--grid-major) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
-    background-size: 32px 32px, 32px 32px, 160px 160px, 160px 160px;
-  }
-
-  .nav-link {
-    @apply text-muted hover:text-ink transition-colors;
   }
 
   .section-block {
@@ -173,30 +161,22 @@
     @apply ml-auto inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-muted;
   }
 
-  .availability-line {
-    @apply mb-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted;
-  }
-
   .status-dot {
-    @apply h-1.5 w-1.5 rounded-full;
+    @apply relative h-1.5 w-1.5 rounded-full;
   }
 
   .status-dot-live {
-    background: var(--status-live);
+    @apply bg-[var(--status-live)];
   }
 
   .status-dot-live::after {
     content: '';
-    position: absolute;
-    inset: -4px;
-    border-radius: 9999px;
-    background: var(--status-live);
-    opacity: 0.38;
+    @apply absolute -inset-1 rounded-full bg-[var(--status-live)] opacity-[0.38];
     animation: status-pulse 2.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 
   .status-dot-dev {
-    background: var(--status-dev);
+    @apply bg-[var(--status-dev)];
   }
 
   .tag {
@@ -208,13 +188,11 @@
   }
 
   .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(10px);
+    @apply translate-y-2.5 opacity-0;
   }
 
   .js [data-reveal].in {
-    opacity: 1;
-    transform: none;
+    @apply translate-y-0 opacity-100;
     transition:
       opacity 0.55s ease,
       transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -236,7 +214,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
+    @apply scroll-auto;
   }
 
   .js [data-reveal] {
