@@ -1,0 +1,250 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/geist-latin.woff2') format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/geist-mono-latin.woff2') format('woff2-variations');
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-sub: var(--sub);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-line-2: var(--line-strong);
+  --color-accent: var(--accent);
+}
+
+:root {
+  --bg: #fcfcfa;
+  --surface: #f3f2ed;
+  --ink: #181815;
+  --sub: #3f3f39;
+  --muted: #5f5f56;
+  --faint: #85857b;
+  --line: #e7e5dc;
+  --line-strong: #d4d1c7;
+  --accent: #0b7350;
+  --accent-soft: rgba(11, 115, 80, 0.1);
+  --status-live: #0b7350;
+  --status-dev: #9a6a00;
+  --grid: rgba(24, 24, 18, 0.026);
+  --grid-major: rgba(24, 24, 18, 0.04);
+  --sel: #c9eadc;
+}
+
+.dark {
+  --bg: #0b0b0c;
+  --surface: #161618;
+  --ink: #f5f5f2;
+  --sub: #c9c9c1;
+  --muted: #a0a098;
+  --faint: #727268;
+  --line: rgba(255, 255, 255, 0.09);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --accent: #45d39a;
+  --accent-soft: rgba(69, 211, 154, 0.13);
+  --status-live: #45d39a;
+  --status-dev: #f6c453;
+  --grid: rgba(255, 255, 255, 0.025);
+  --grid-major: rgba(255, 255, 255, 0.045);
+  --sel: rgba(69, 211, 154, 0.25);
+}
+
+@layer base {
+  html {
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11', 'ss01';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  body {
+    min-width: 320px;
+    background: var(--bg);
+    color: var(--ink);
+  }
+
+  ::selection {
+    background: var(--sel);
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .page-shell {
+    @apply relative z-10 mx-auto max-w-[760px] px-5 sm:px-6;
+  }
+
+  .grid-bg::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+    background-size: 32px 32px, 32px 32px, 160px 160px, 160px 160px;
+    mask-image: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.72) 42%, transparent 100%);
+  }
+
+  .site-header {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+      linear-gradient(var(--grid-major) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-major) 1px, transparent 1px);
+    background-size: 32px 32px, 32px 32px, 160px 160px, 160px 160px;
+  }
+
+  .nav-link {
+    @apply text-muted hover:text-ink transition-colors;
+  }
+
+  .section-block {
+    @apply border-t border-line py-12 sm:py-[58px];
+  }
+
+  .section-kicker {
+    @apply mb-6 font-mono text-[11px] uppercase tracking-[0.14em] text-muted;
+  }
+
+  .section-kicker span {
+    @apply text-faint;
+  }
+
+  .body-copy {
+    @apply max-w-[610px] text-[15px] leading-[1.8] text-sub;
+  }
+
+  .external-link {
+    @apply inline-flex items-center gap-1 rounded-[5px] text-muted hover:text-ink transition-colors;
+  }
+
+  .external-link svg {
+    @apply h-[13px] w-[13px] shrink-0;
+  }
+
+  .text-link {
+    text-decoration: none;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0 1px;
+    transition: background-size 0.2s ease;
+  }
+
+  .text-link:hover {
+    background-size: 100% 1px;
+  }
+
+  .status-label {
+    @apply ml-auto inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.1em] text-muted;
+  }
+
+  .availability-line {
+    @apply mb-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-muted;
+  }
+
+  .status-dot {
+    @apply h-1.5 w-1.5 rounded-full;
+  }
+
+  .status-dot-live {
+    background: var(--status-live);
+  }
+
+  .status-dot-live::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 9999px;
+    background: var(--status-live);
+    opacity: 0.38;
+    animation: status-pulse 2.3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  .status-dot-dev {
+    background: var(--status-dev);
+  }
+
+  .tag {
+    @apply rounded border border-line bg-surface px-2 py-0.5 font-mono text-[11px] text-muted;
+  }
+
+  .timeline-dot {
+    @apply absolute -left-[5px] top-[6px] h-2.5 w-2.5 rounded-full ring-4 ring-bg;
+  }
+
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .js [data-reveal].in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.55s ease,
+      transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+}
+
+@keyframes status-pulse {
+  0% {
+    transform: scale(0.65);
+    opacity: 0.38;
+  }
+
+  70%,
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .status-dot-live::after {
+    animation: none;
+  }
+}

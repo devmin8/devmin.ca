@@ -1,0 +1,18 @@
+# devmin.ca
+
+devmin.ca is the personal site for Shanmugharaj Kumaragurubaran, also known as Shan.
+He is a Toronto-based senior frontend engineer with experience across fintech, retail, logistics, developer tooling, open source PaaS, and self-hosted infrastructure.
+He is actively seeking senior frontend engineer roles in Toronto or remote teams.
+He is building Rivet, an open source self-hosted PaaS for deploying Dockerfile apps and public images on a single VPS.
+
+## Primary Links
+
+- [Website](https://devmin.ca/)
+- [Resume](https://devmin.ca/Shanmugharaj_Resume.pdf)
+- [GitHub](https://github.com/devmin8)
+- [LinkedIn](https://linkedin.com/in/shanmugharaj)
+- [Sitemap](https://devmin.ca/sitemap.xml)
+
+## Usage Notes
+
+Public website content may be indexed for search and retrieval.
